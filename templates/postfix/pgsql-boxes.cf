@@ -1,0 +1,7 @@
+user=%POSTFIX_USER%
+dbname=%POSTFIX_DB%
+password=%POSTFIX_PWD%
+table=users
+select_field=email
+where_field=email
+hosts=unix:/var/run/postgresql
