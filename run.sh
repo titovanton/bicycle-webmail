@@ -50,8 +50,8 @@ cp templates/postfix/aliases /etc/aliases
 # Dovecot setup
 adduser --system --no-create-home --uid 500 --group --disabled-password --disabled-login --gecos 'dovecot virtual mail user' $DOVECOT_USER
 mkdir $MAILBOXES
-chown $DOVECOT_USER:$DOVECOT_USER $MAILBOXES
-chmod 700 $MAILBOXES
+chown -R $DOVECOT_USER:$DOVECOT_USER $MAILBOXES
+chmod -R 700 $MAILBOXES
 
 sed -e "s;%POSTFIX_DB%;$POSTFIX_DB;g" \
     -e "s;%POSTFIX_USER%;$POSTFIX_USER;g" \

@@ -65,7 +65,8 @@ and our mail bundle has access to DB. Reload PostgreSQL:
 
 Now is the time to clone this repository (I hope you have your own home directory):
 
-    cd $HOME
+    mkdir -p $HOME/src
+    cd $HOME/src
     git clone https://github.com/titovanton-com/bicycle-webmail.git
     cd bicycle-webmail
 
