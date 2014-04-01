@@ -14,22 +14,21 @@ Most guides describes how to install Webmail bundle with Apache2 and MySQL... Bu
 
 First of all, update and upgrade your OS:
 
-    sudo aptitude update
-    sudo aptitude upgrade
+    sudo aptitude update && sudo aptitude upgrade -y
 
 next install git to clone the repository:
 
-    sudo aptitude install git
+    sudo aptitude install git -y
 
 then install PostgreSQL:
 
-    sudo aptitude install postgresql
+    sudo aptitude install postgresql -y
 
 Postfix, Dovecot:
 
-    sudo aptitude remove exim4
-    sudo aptitude install postfix postfix-pgsql
-    sudo aptitude install dovecot-core dovecot-common dovecot-lmtpd dovecot-pgsql dovecot-imapd
+    sudo aptitude remove exim4 -y
+    sudo aptitude install postfix postfix-pgsql -y
+    sudo aptitude install dovecot-core dovecot-common dovecot-lmtpd dovecot-pgsql dovecot-imapd dovecot-pop3d -y
 
 select `no configuration` when Postfix will aske you.
 
