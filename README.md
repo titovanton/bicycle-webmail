@@ -30,7 +30,7 @@ Postfix, Dovecot, SpamAssassin:
     sudo aptitude remove exim4 -y
     sudo aptitude install postfix postfix-pgsql -y
     sudo aptitude install dovecot-core dovecot-common dovecot-lmtpd dovecot-pgsql dovecot-imapd dovecot-pop3d -y
-    sudo apt-get install spamassassin spamc
+    sudo aptitude install spamassassin spamc
 
 select `no configuration` when Postfix will aske you.
 
