@@ -7,3 +7,8 @@ submission inet n       -       -       -       -       smtpd
   -o milter_macro_daemon_name=ORIGINATING
   -o smtpd_sasl_type=dovecot
   -o smtpd_sasl_path=private/auth
+  -o content_filter=spamassassin
+
+spamassassin unix -     n       n       -       -       pipe
+  user=spamd argv=/usr/bin/spamc -f -e  
+  /usr/sbin/sendmail -oi -f ${sender} ${recipient}

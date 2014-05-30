@@ -66,6 +66,12 @@ sed -e "s;%MAILNAME%;$MAILNAME;g" \
     -e "s;%MYHOSTNAME%;$MYHOSTNAME;g" \
     templates/dovecot/dovecot.conf > /etc/dovecot/dovecot.conf
 
+# SpamAssassin
+adduser spamd --disabled-login
+cat templates/spamassassin/spamassassin > /etc/default/spamassassin
+cat templates/spamassassin/local.cf > /etc/spamassassin/local.cf
+
 newaliases
+service spamassassin start
 service postfix start
 service dovecot start
