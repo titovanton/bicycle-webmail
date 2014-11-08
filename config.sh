@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # PostgreSQL access
+POSTFIX_V=9.3
 POSTFIX_DB=mail
 POSTFIX_USER=mailreader
 POSTFIX_PWD=1

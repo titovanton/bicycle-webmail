@@ -6,12 +6,12 @@ service dovecot stop
 source ./config.sh
 
 # PostgreSQL setup
-if [ ! -f /etc/postgresql/9.1/main/pg_ident.conf ]; then
-    echo 'DOES NOT EXISTS: /etc/postgresql/9.1/main/pg_ident.conf'
+if [ ! -f /etc/postgresql/$POSTFIX_V/main/pg_ident.conf ]; then
+    echo 'DOES NOT EXISTS: /etc/postgresql/$POSTFIX_V/main/pg_ident.conf'
     exit 0
 fi
 sed -e "s;%POSTFIX_USER%;$POSTFIX_USER;g" \
-    templates/psql/pg_ident.conf.inc >> /etc/postgresql/9.1/main/pg_ident.conf
+    templates/psql/pg_ident.conf.inc >> /etc/postgresql/$POSTFIX_V/main/pg_ident.conf
 
 echo '########### CREATING DB AND USER ###########'
 psql -h localhost -U postgres -f sql/createdb.sql -v usr=$POSTFIX_USER -v db=$POSTFIX_DB -v passwd=\'$POSTFIX_PWD\'

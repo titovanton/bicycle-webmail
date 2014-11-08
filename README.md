@@ -27,10 +27,10 @@ then install PostgreSQL:
 
 Postfix, Dovecot, SpamAssassin:
 
-    sudo aptitude remove exim4 -y
-    sudo aptitude install postfix postfix-pgsql -y
-    sudo aptitude install dovecot-core dovecot-common dovecot-lmtpd dovecot-pgsql dovecot-imapd dovecot-pop3d -y
-    sudo aptitude install spamassassin spamc
+    sudo aptitude remove exim4 -y; \
+    sudo aptitude install postfix postfix-pgsql -y; \
+    sudo aptitude install dovecot-core dovecot-common dovecot-lmtpd dovecot-pgsql dovecot-imapd dovecot-pop3d -y; \
+    sudo aptitude install spamassassin spamc -y
 
 select `no configuration` when Postfix will aske you.
 
@@ -86,9 +86,17 @@ Also, script make SSL certificates for mail client access, such as Thunderbird, 
 
 In Thunderbird, just add a new Account (File -> New -> Existing Mail Account) and enter joe@yourdomain.com and the password in the dialog.
 
-If your mail client doesn't auto-detect the necessary settings: The username for the IMAP connection is joe, the port is 143, and the authentication method is unencrypted password via STARTTLS. For SMTP it's the same, but port 587.
+* the IMAP port is 143
+* the authentication method is unencrypted password via STARTTLS
+* for SMTP it's the same, but port 587
 
-If anything isn't working, check for error messages in the system log with tail -n 50 /var/log/syslog and in the mail log with tail -n 50 /var/log/mail.log.
+If anything isn't working, check for error messages in the system log with
+
+    sudo tail -n 50 /var/log/syslog
+
+and in the mail log with
+
+    tail -n 50 /var/log/mail.log.
 
 ## Links and sources:
 
