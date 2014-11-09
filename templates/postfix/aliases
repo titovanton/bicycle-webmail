@@ -1,3 +1,4 @@
+no-reply: /dev/null
 mailer-daemon: postmaster
 postmaster: root
 nobody: root

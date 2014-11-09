@@ -14,14 +14,16 @@ sed -e "s;%POSTFIX_USER%;$POSTFIX_USER;g" \
     templates/psql/pg_ident.conf.inc >> /etc/postgresql/$POSTFIX_V/main/pg_ident.conf
 
 echo '########### CREATING DB AND USER ###########'
-psql -h localhost -U postgres -f sql/createdb.sql -v usr=$POSTFIX_USER -v db=$POSTFIX_DB -v passwd=\'$POSTFIX_PWD\'
+psql -h localhost -U postgres -f sql/createdb.sql \
+     -v usr=$POSTFIX_USER -v db=$POSTFIX_DB -v passwd=\'$POSTFIX_PWD\'
 echo '########### CREATING TABLES ###########'
 psql -h localhost -U $POSTFIX_USER -d $POSTFIX_DB -f sql/tables.sql
 
 service postgresql reload
 
 # Postfix setup
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/mail.key -out /etc/ssl/certs/mailcert.pem
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+        -keyout /etc/ssl/private/mail.key -out /etc/ssl/certs/mailcert.pem
 chown root /etc/ssl/private/mail.key
 
 cat templates/postfix/master.cf.inc >> /etc/postfix/master.cf
@@ -46,9 +48,13 @@ sed -e "s;%MYHOSTNAME%;$MYHOSTNAME;g" \
 sed -e "s;%MAILNAME%;$MAILNAME;g" templates/postfix/mailname > /etc/mailname
 
 cp templates/postfix/aliases /etc/aliases
+sed -e "s;%DOMAIN%;$DOMAIN;g" \
+    templates/postfix/virtual_aliases > /etc/postfix/virtual_aliases
 
 # Dovecot setup
-adduser --system --no-create-home --uid 500 --group --disabled-password --disabled-login --gecos 'dovecot virtual mail user' $DOVECOT_USER
+adduser --system --no-create-home --uid 500 --group \
+        --disabled-password --disabled-login \
+        --gecos 'dovecot virtual mail user' $DOVECOT_USER
 mkdir $MAILBOXES
 chown -R $DOVECOT_USER:$DOVECOT_USER $MAILBOXES
 chmod -R 700 $MAILBOXES
@@ -71,6 +77,7 @@ adduser spamd --disabled-login
 cat templates/spamassassin/spamassassin > /etc/default/spamassassin
 cat templates/spamassassin/local.cf > /etc/spamassassin/local.cf
 
+postmap /etc/postfix/virtual_aliases
 newaliases
 service spamassassin start
 service postfix start
