@@ -11,7 +11,6 @@ virtual_mailbox_limit = 0
 
 # alias_database = hash:/etc/aliases
 alias_maps = hash:/etc/aliases proxy:pgsql:/etc/postfix/pgsql-aliases.cf
-virtual_alias_maps = hash:/etc/postfix/virtual_aliases
 local_recipient_maps = proxy:pgsql:/etc/postfix/pgsql-boxes.cf $alias_maps
 mailbox_transport = lmtp:unix:private/dovecot-lmtp
 

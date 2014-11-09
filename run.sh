@@ -48,8 +48,6 @@ sed -e "s;%MYHOSTNAME%;$MYHOSTNAME;g" \
 sed -e "s;%MAILNAME%;$MAILNAME;g" templates/postfix/mailname > /etc/mailname
 
 cp templates/postfix/aliases /etc/aliases
-sed -e "s;%DOMAIN%;$DOMAIN;g" \
-    templates/postfix/virtual_aliases > /etc/postfix/virtual_aliases
 
 # Dovecot setup
 adduser --system --no-create-home --uid 500 --group \
@@ -77,7 +75,6 @@ adduser spamd --disabled-login
 cat templates/spamassassin/spamassassin > /etc/default/spamassassin
 cat templates/spamassassin/local.cf > /etc/spamassassin/local.cf
 
-postmap /etc/postfix/virtual_aliases
 newaliases
 service spamassassin start
 service postfix start
