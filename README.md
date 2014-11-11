@@ -82,9 +82,17 @@ Following to config.sh for specifying password and domains.
 Be ready to enter sudo password, postgres password, and password that you specify in config.sh, to access Postfix to DB.
 Also, script make SSL certificates for mail client access, such as Thunderbird, so be ready for openssl dialog.
 
+## Make a new mailbox and user
+
+First of all you have to deside: do you needed in no-reply@example.com service? If you do, then run the following:
+
+    sudo $HOME/src/bicycle-webmail/make_mailbox.sh no-reply@example.com
+
+the same way you have to follow to make a new real users and their boxes. But they will not have /dev/null alias instead of no-reply([watch the aliases file](https://github.com/titovanton/bicycle-webmail/blob/master/templates/postfix/aliases)).
+
 ## Configure mail clients
 
-In Thunderbird, just add a new Account (File -> New -> Existing Mail Account) and enter joe@yourdomain.com and the password in the dialog.
+In Thunderbird, just add a new Account (File -> New -> Existing Mail Account) and enter joe@example.com and the password in the dialog.
 
 * the IMAP port is 143
 * the authentication method is unencrypted password via STARTTLS

@@ -17,6 +17,6 @@ DOVECOT_USER=vmail
 MAILBOXES=/home/mailboxes
 
 # For example: example.com
-DOMAIN=mail4.local
+DOMAIN=example.com
 MYHOSTNAME=mail.$DOMAIN
 MAILNAME=$DOMAIN
